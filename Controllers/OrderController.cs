@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -13,6 +12,8 @@ using TestPickPoint.Services;
 
 namespace TestPickPoint.Controllers
 {
+
+    [Route("api/[controller]")]
     public class OrderController : ApiController
     {
 
@@ -25,6 +26,7 @@ namespace TestPickPoint.Controllers
             this.postamatRepository = new PostamatRepository();
         }
 
+        [Route("createOrder")]
         [HttpPost]
         public HttpResponseMessage CreateOrder(Order order)
         {
@@ -39,8 +41,9 @@ namespace TestPickPoint.Controllers
             }
             throw new HttpResponseException(chechk);
         }
-  
 
+
+        [Route("changeOrder")]
         [HttpPatch]
         public HttpResponseMessage ChangeOrder(Order order)
         {
@@ -56,6 +59,8 @@ namespace TestPickPoint.Controllers
             throw new HttpResponseException(chechk);
         }
 
+
+        [Route("getOrderInformation/{orderNumber}")]
         [HttpGet]
         public HttpResponseMessage GetOrderInformation(int orderNumber)         
         {
@@ -69,6 +74,7 @@ namespace TestPickPoint.Controllers
             return response;
         }
 
+        [Route("calcelOrder/{orderNumber}")]
         [HttpDelete]
         public HttpResponseMessage CalcelOrder(int orderNumber)
         {
@@ -108,6 +114,7 @@ namespace TestPickPoint.Controllers
             }
             if (!this.postamatRepository.SearchPostamat(order.PostamatNumber.ToString()))
                 return HttpStatusCode.NotFound;//«не найден».
+
             return HttpStatusCode.OK;
         }
     }

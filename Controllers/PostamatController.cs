@@ -10,6 +10,8 @@ using TestPickPoint.Services;
 
 namespace TestPickPoint.Controllers
 {
+
+    [Route("api/[controller]")]
     public class PostamatController : ApiController
     {
 
@@ -19,6 +21,8 @@ namespace TestPickPoint.Controllers
         {
             this.PostamatRepository = new PostamatRepository();
         }
+
+        [Route("getPostamat/{numberPostamat}")]
         [HttpGet]
         public HttpResponseMessage GetPostamat(string numberPostamat)
         {
